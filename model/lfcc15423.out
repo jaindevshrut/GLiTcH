@@ -1,0 +1,16 @@
+--- Path Check ---
+/home/tanmoyhazra/jatin/train_list.txt
+/home/tanmoyhazra/jatin/dev_list.txt
+ERROR: train_mel_cnn.py script not found
+--- Starting PyTorch Training ---
+device cuda cuda True
+epoch 1 train_loss 0.0197 dev_eer 0.0 dev_acc 0.9988 elapsed_sec 259.51
+epoch 2 expected_sec 43.52
+epoch 2 train_loss 0.0032 dev_eer 0.0 dev_acc 0.9957 elapsed_sec 254.51
+epoch 3 expected_sec 40.25
+epoch 3 train_loss 0.0019 dev_eer 0.0 dev_acc 0.9993 elapsed_sec 250.8
+epoch 4 expected_sec 39.05
+epoch 4 train_loss 0.0021 dev_eer 0.0 dev_acc 0.9999 elapsed_sec 259.92
+epoch 5 expected_sec 39.87
+epoch 5 train_loss 0.004 dev_eer 0.0 dev_acc 0.9999 elapsed_sec 250.82
+epoch 6 expected_sec 38.79

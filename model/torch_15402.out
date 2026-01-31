@@ -1,0 +1,29 @@
+--- Path Check ---
+/home/tanmoyhazra/jatin/real_audio
+/home/tanmoyhazra/jatin/fake_audio
+-rw-rw-r-- 1 tanmoyhazra tanmoyhazra 12002 Jan 31 23:52 /home/tanmoyhazra/jatin/scripts/train.py
+--- Starting PyTorch Training ---
+Training on device: cuda
+Train batches: 319, Dev batches: 36
+Epoch 1/20 | Loss: 18.8898 | Dev EER: 0.1139 | Dev Acc: 0.5754
+Epoch 2/20 | Loss: 16.8301 | Dev EER: 0.3015 | Dev Acc: 0.5422
+Epoch 3/20 | Loss: 16.4171 | Dev EER: 0.0000 | Dev Acc: 0.6887
+Epoch 4/20 | Loss: 16.2072 | Dev EER: 0.0000 | Dev Acc: 0.5948
+Epoch 5/20 | Loss: 16.5387 | Dev EER: 0.0000 | Dev Acc: 0.7621
+Epoch 6/20 | Loss: 16.2733 | Dev EER: 0.0000 | Dev Acc: 0.8098
+Epoch 7/20 | Loss: 15.9918 | Dev EER: 0.9989 | Dev Acc: 0.9011
+Epoch 8/20 | Loss: 15.6978 | Dev EER: 0.1903 | Dev Acc: 0.8338
+Epoch 9/20 | Loss: 15.8146 | Dev EER: 0.0088 | Dev Acc: 0.7430
+Epoch 10/20 | Loss: 15.6632 | Dev EER: 0.7533 | Dev Acc: 0.5176
+Error reading /home/tanmoyhazra/jatin/fake_audio/row_134368.wav: local variable 'data' referenced before assignment
+Epoch 11/20 | Loss: 15.6193 | Dev EER: 0.0000 | Dev Acc: 0.4947
+Epoch 12/20 | Loss: 15.4875 | Dev EER: 0.0000 | Dev Acc: 0.5086
+Epoch 13/20 | Loss: 15.4178 | Dev EER: 0.0000 | Dev Acc: 0.6642
+Epoch 14/20 | Loss: 15.3976 | Dev EER: 0.0000 | Dev Acc: 0.6640
+Epoch 15/20 | Loss: 15.3627 | Dev EER: 0.0000 | Dev Acc: 0.6966
+Epoch 16/20 | Loss: 15.3500 | Dev EER: 0.0000 | Dev Acc: 0.8788
+Epoch 17/20 | Loss: 15.3290 | Dev EER: 0.0000 | Dev Acc: 0.8393
+Epoch 18/20 | Loss: 15.3170 | Dev EER: 0.0000 | Dev Acc: 0.8498
+Epoch 19/20 | Loss: 15.3149 | Dev EER: 0.0000 | Dev Acc: 0.9727
+Epoch 20/20 | Loss: 15.3065 | Dev EER: 0.0000 | Dev Acc: 0.6900
+Best EER: 0.0
