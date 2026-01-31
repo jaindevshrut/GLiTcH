@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Audio Detector</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container" id="container" style="display: none;">
+    <!-- Status Indicator -->
+    <div id="status-container" class="status-container">
+      <div id="status-ring" class="status-ring detecting">
+        <div id="status-icon" class="status-icon">🤖</div>
+      </div>
+      <div id="status-text" class="status-text">AI Detected</div>
+    </div>
+
+    <!-- Result Display -->
+    <div id="result-display" class="result-display">
+      <div id="result-label" class="result-label">AI Voice Detected</div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
