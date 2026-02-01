@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Authentication</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Voice Authentication System</h1>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('register')">Register</button>
+            <button class="tab-btn" onclick="openTab('login')">Login</button>
+        </div>
+
+        <div id="register" class="tab-content active">
+            <h2>Registration</h2>
+            <p>Enter your username and record your voice (e.g., read a paragraph or speak naturally for 15-30 seconds).</p>
+            
+            <div class="form-group">
+                <input type="text" id="reg-username" placeholder="Username">
+            </div>
+            
+            <div class="controls">
+                <button id="reg-start-btn" onclick="startRecording('reg')">Start Recording</button>
+                <button id="reg-stop-btn" onclick="stopRecording('reg')" disabled>Stop Recording</button>
+            </div>
+            
+            <div id="reg-status" class="status"></div>
+            <audio id="reg-audio" controls style="display:none"></audio>
+            
+            <button id="reg-submit" onclick="registerUser()" disabled>Register User</button>
+        </div>
+
+        <div id="login" class="tab-content">
+            <h2>Login</h2>
+            <p>Enter your username, get a challenge phrase, and read it aloud.</p>
+            
+            <div class="form-group">
+                <input type="text" id="login-username" placeholder="Username">
+            </div>
+
+            <button onclick="getChallenge()">Get Challenge Phrase</button>
+            
+            <div id="challenge-box" class="challenge-box hidden">
+                <h3 id="challenge-text"></h3>
+            </div>
+            
+            <div class="controls">
+                <button id="login-start-btn" onclick="startRecording('login')" disabled>Start Recording</button>
+                <button id="login-stop-btn" onclick="stopRecording('login')" disabled>Stop Recording</button>
+            </div>
+            
+            <div id="login-status" class="status"></div>
+            <audio id="login-audio" controls style="display:none"></audio>
+            
+            <button id="login-submit" onclick="loginUser()" disabled>Verify & Login</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

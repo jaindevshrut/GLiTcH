@@ -1,0 +1,163 @@
+
+body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #1e293b;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid #334155;
+}
+
+h1 {
+    color: #38bdf8;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+h2 {
+    color: #94a3b8;
+    font-size: 1.25rem;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.tab-btn.active {
+    color: #38bdf8;
+    border-bottom-color: #38bdf8;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid #475569;
+    background-color: #0f172a;
+    color: white;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+button {
+    background-color: #38bdf8;
+    color: #0f172a;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+    font-size: 1rem;
+}
+
+button:hover:not(:disabled) {
+    background-color: #0ea5e9;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #475569;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.controls button {
+    flex: 1;
+}
+
+#reg-stop-btn, #login-stop-btn {
+    background-color: #ef4444;
+    color: white;
+}
+
+#reg-stop-btn:hover:not(:disabled), #login-stop-btn:hover:not(:disabled) {
+    background-color: #dc2626;
+}
+
+.status {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    min-height: 1.2rem;
+    white-space: pre-line;
+}
+
+audio {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.challenge-box {
+    background-color: #0f172a;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px dashed #475569;
+    margin: 1.5rem 0;
+}
+
+.challenge-box.hidden {
+    display: none;
+}
+
+h3 {
+    margin: 0;
+    font-style: italic;
+    color: #fbbf24;
+}

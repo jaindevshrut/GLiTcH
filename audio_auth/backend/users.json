@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "embedding_path": "embeddings\\dev_embedding.npy"
+    },
+    "sweta": {
+        "embedding_path": "embeddings\\sweta_embedding.npy"
+    },
+    "swetaa": {
+        "embedding_path": "embeddings\\swetaa_embedding.npy"
+    },
+    "Dev Shrut Jain": {
+        "embedding_path": "embeddings\\Dev Shrut Jain_embedding.npy"
+    }
+}
