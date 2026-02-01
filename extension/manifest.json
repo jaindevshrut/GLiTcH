@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Audio Recorderr",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "Tab Audio Recorder",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "permissions": ["activeTab", "tabs", "tabCapture", "downloads", "offscreen", "storage"],
+  "host_permissions": ["https://api.aurigin.ai/*"]
+}
