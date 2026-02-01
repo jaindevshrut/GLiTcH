@@ -47,7 +47,7 @@ GLiTcH uses an ensemble of four specialized deep learning models, each trained o
 🔧 Threshold: 0.618
 ```
 
-### 3️⃣ best_mel (Mel Spectrogram Model) ⭐ Best Overall
+### 3️⃣ best_mel (Mel Spectrogram Model) ⭐
 ```
 📊 Architecture: CNN trained on Mel-scale spectrograms
 🎯 Specialty: Human auditory perception-aligned features
@@ -82,10 +82,10 @@ Our models were evaluated on a test dataset with the following results:
 - **EER (Equal Error Rate)**: Point where false acceptance rate equals false rejection rate (lower is better)
 
 #### 🏆 Best Performers:
-- **Highest Accuracy**: best_mel (95.14%)
-- **Lowest EER**: best_mel (2.82%)
-- **Best F1 Score**: best_mel (91.61%)
-- **Primary Model**: best_mel_cnn.pt
+- **Highest Accuracy**: best_mel_cnn (95.14%)
+- **Lowest EER**: best_mel_cnn (2.82%)
+- **Best F1 Score**: best_mel_cnn (91.61%)
+- **Primary Model**: best_mel.pt
 
 ---
 
