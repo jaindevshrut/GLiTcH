@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Aurigin API Configuration
   const AURIGIN_API_URL = "https://api.aurigin.ai/v1/predict";
-  const DEFAULT_API_KEY = "z6rwQ7rame6rQnK6NL6NU2r1QOQpzqFE2TX9avyQ";
+  const DEFAULT_API_KEY = "YOUR_API_KEY_HERE"; // Replace with your API key
 
   // State
   let isRecording = false;

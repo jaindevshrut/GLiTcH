@@ -2,7 +2,6 @@
 
 <div align="center">
 
-![GLiTcH Logo](glitch-extension/icons/icon128.svg)
 
 **Real-time AI-generated voice detection for video calls & audio streams**
 
@@ -30,85 +29,101 @@ GLiTcH is a Chrome extension that detects **AI-generated/deepfake voices** in re
 
 ## 🧠 The Models Behind GLiTcH
 
-We evaluated and tested multiple state-of-the-art deepfake detection models:
+GLiTcH uses an ensemble of four specialized deep learning models, each trained on different audio feature representations:
 
-### 1️⃣ LCNN (Light Convolutional Neural Network)
+### 1️⃣ best_mel_cnn.pt (Primary Model) ⭐
 ```
-📊 Architecture: Lightweight CNN with Max-Feature-Map activation
-🎯 Specialty: Efficient spectral feature extraction
-⚡ Speed: Fast inference, low computational cost
-```
-
-### 2️⃣ RawNet2
-```
-📊 Architecture: End-to-end raw waveform processing
-🎯 Specialty: Direct audio analysis without preprocessing
-⚡ Speed: Processes raw audio signals directly
+📊 Architecture: CNN trained on Mel-scale spectrograms
+🎯 Specialty: Best overall deepfake detection performance
+⚡ Performance: ACC 92.76% | EER 4.10%
+🔧 Threshold: 0.521
 ```
 
-### 3️⃣ AASIST (Audio Anti-Spoofing using Integrated Spectro-Temporal)
+### 2️⃣ best_lfcc (LFCC-based Model)
 ```
-📊 Architecture: Graph Attention Networks + Spectro-temporal features
-🎯 Specialty: State-of-the-art performance on ASVspoof datasets
-⚡ Speed: High accuracy with reasonable inference time
+📊 Architecture: CNN trained on Linear Frequency Cepstral Coefficients
+🎯 Specialty: Captures fine-grained spectral characteristics
+⚡ Performance: ACC 90.55% | EER 4.96%
+🔧 Threshold: 0.618
 ```
 
-### Model Comparison
+### 3️⃣ best_mel (Mel Spectrogram Model) ⭐ Best Overall
+```
+📊 Architecture: CNN trained on Mel-scale spectrograms
+🎯 Specialty: Human auditory perception-aligned features
+⚡ Performance: ACC 95.14% | EER 2.82% | F1 91.61%
+🔧 Threshold: 0.526
+```
 
-| Model | Accuracy | Speed | Use Case |
-|-------|----------|-------|----------|
-| LCNN | 92% | ⚡ Fast | Real-time detection |
-| RawNet2 | 94% | 🔄 Medium | High accuracy needs |
-| AASIST | 96% | 🐢 Slower | Maximum accuracy |
+### 4️⃣ best_rawnet (RawNet-based Model)
+```
+📊 Architecture: End-to-end raw waveform processing network
+🎯 Specialty: Direct audio signal analysis without preprocessing
+⚡ Performance: ACC 84.02% | EER 6.17%
+🔧 Threshold: 0.562
+```
+
+### Model Performance Results
+
+Our models were evaluated on a test dataset with the following results:
+
+| Model | Threshold | TN | FP | FN | TP | Accuracy | Precision | Recall | F1 Score | EER |
+|-------|-----------|-----|-----|-----|-----|----------|-----------|--------|----------|------|
+| **best_mel_cnn.pt** | 0.521 | 229 | 5 | 16 | 41 | **92.76%** | 89.15% | 71.79% | 84.86% | 4.10% |
+| **best_lfcc** | 0.618 | 271 | 19 | 20 | 103 | 90.55% | 84.44% | 83.76% | 80.99% | 4.96% |
+| **best_mel** | 0.526 | 419 | 11 | 13 | 51 | **95.14%** | 82.09% | 79.49% | **91.61%** | **2.82%** |
+| **best_rawnet** | 0.562 | 290 | 38 | 35 | 94 | 84.02% | 71.18% | 72.88% | 72.22% | 6.17% |
+
+#### 📊 Key Metrics Explained:
+- **Accuracy (ACC)**: Overall correctness of predictions
+- **Precision (PREC)**: Of all predicted deepfakes, how many were actually deepfakes
+- **Recall (REC)**: Of all actual deepfakes, how many were detected
+- **F1 Score**: Harmonic mean of precision and recall
+- **EER (Equal Error Rate)**: Point where false acceptance rate equals false rejection rate (lower is better)
+
+#### 🏆 Best Performers:
+- **Highest Accuracy**: best_mel (95.14%)
+- **Lowest EER**: best_mel (2.82%)
+- **Best F1 Score**: best_mel (91.61%)
+- **Primary Model**: best_mel_cnn.pt
 
 ---
 
 ## 🏗️ Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                        GLiTcH Extension                          │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│   ┌──────────────┐     ┌──────────────┐     ┌──────────────┐   │
-│   │   Browser    │────▶│  Tab Audio   │────▶│   Offscreen  │   │
-│   │    Tab       │     │   Capture    │     │   Document   │   │
-│   └──────────────┘     └──────────────┘     └──────┬───────┘   │
-│                                                     │            │
-│                                                     ▼            │
-│                                            ┌──────────────┐      │
-│                                            │  WAV Convert │      │
-│                                            │  (16kHz Mono)│      │
-│                                            └──────┬───────┘      │
-│                                                     │            │
-└─────────────────────────────────────────────────────┼────────────┘
-                                                      │
-                                                      ▼
-                    ┌─────────────────────────────────────────────┐
-                    │           🤗 Hugging Face API               │
-                    ├─────────────────────────────────────────────┤
-                    │                                             │
-                    │   ┌─────────┐  ┌─────────┐  ┌─────────┐   │
-                    │   │  LCNN   │  │ RawNet2 │  │ AASIST  │   │
-                    │   └────┬────┘  └────┬────┘  └────┬────┘   │
-                    │        │            │            │         │
-                    │        └────────────┼────────────┘         │
-                    │                     ▼                      │
-                    │              ┌────────────┐                │
-                    │              │  Ensemble  │                │
-                    │              │  Prediction│                │
-                    │              └─────┬──────┘                │
-                    │                    │                       │
-                    └────────────────────┼───────────────────────┘
-                                         │
-                                         ▼
-                              ┌────────────────────┐
-                              │      Result        │
-                              │  ┌──────────────┐  │
-                              │  │ 🤖 AI: 92.7% │  │
-                              │  │ 👤 Human: 7% │  │
-                              │  └──────────────┘  │
-                              └────────────────────┘
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│  Browser Tab    │────▶│  Audio Capture  │────▶│  WAV Convert    │
+│  (Any website)  │     │  (Tab Audio)    │     │  (16kHz Mono)   │
+└─────────────────┘     └─────────────────┘     └────────┬────────┘
+                                                         │
+                                                         ▼
+                                            ┌─────────────────────┐
+                                            │  🤗 Hugging Face    │
+                                            │      API            │
+                                            └────────┬────────────┘
+                                                     │
+                        ┌────────────────────────────┼────────────────────────────┐
+                        │                            │                            │
+                        ▼                            ▼                            ▼
+              ┌─────────────────┐        ┌─────────────────┐        ┌─────────────────┐
+              │   best_rawnet   │        │    best_lfcc    │        │    best_mel     │
+              │   ACC: 84.02%   │        │   ACC: 90.55%   │        │   ACC: 95.14%   │
+              └────────┬────────┘        └────────┬────────┘        └────────┬────────┘
+                       │                          │                          │
+                       └──────────────────────────┼──────────────────────────┘
+                                                  │
+                                                  ▼
+                                      ┌─────────────────────┐
+                                      │  best_mel_cnn.pt ⭐ │
+                                      │   (Primary Model)   │
+                                      └──────────┬──────────┘
+                                                 │
+                                                 ▼
+                                      ┌─────────────────────┐
+                                      │   Detection Result  │
+                                      │   🤖 AI / 👤 Human  │
+                                      └─────────────────────┘
 ```
 
 ---
@@ -166,10 +181,7 @@ GLiTcH also provides visual analysis tools to compare audio:
 | **Spectrogram** | Irregular vertical bands | Dense, consistent energy |
 | **Mel Spectrogram** | Organic variations | Repetitive horizontal bands |
 
-```python
-# Analyze and compare audio files
-python graphofaudio.py
-```
+
 
 ---
 
@@ -179,7 +191,7 @@ python graphofaudio.py
 
 1. Clone this repository
 ```bash
-git clone https://github.com/yourusername/glitch-extension.git
+git clone https://github.com/jaindevshrut/GLiTcH.git
 ```
 
 2. Open Chrome and go to `chrome://extensions`
@@ -218,9 +230,6 @@ glitch-extension/
     ├── requirements.txt    # Python dependencies
     └── README.md           # Space documentation
 
-📄 test.py                  # API testing script
-📄 config.py                # API keys and configuration
-📄 graphofaudio.py          # Audio visualization & comparison
 ```
 
 ---
@@ -241,24 +250,8 @@ python test.py
 # Output: Result: spoofed (92.7% confidence)
 ```
 
-### Audio Visualization
-```bash
-python graphofaudio.py
-# Generates: audio_comparison.png
-```
-
 ---
 
-## 🔐 API Configuration
-
-Create a `config.py` file:
-
-```python
-API_KEY = "your_api_key_here"
-BASE_URL = "https://api.aurigin.ai/v1"
-```
-
----
 
 ## 🏆 Results & Performance
 
