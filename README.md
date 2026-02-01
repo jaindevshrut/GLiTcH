@@ -90,7 +90,7 @@ Our models were evaluated on a test dataset with the following results:
 ---
 
 ## 🏗️ Architecture
-
+![GLiTcH Architecture](image.png)
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
 │  Browser Tab    │────▶│  Audio Capture  │────▶│  WAV Convert    │
